@@ -3,23 +3,21 @@ pipeline {
   stages {
     stage('compile') {
       steps {
-        //dir("/Users/rafael/cursos-dev/diplomado-devops/ci-cd/ejemplo-maven") {
+        
           sh 'mvn clean compile -e'
-        //}
+        
       }
     }
     stage('test') {
       steps {
-        //dir("/Users/rafael/cursos-dev/diplomado-devops/ci-cd/ejemplo-maven") {
+        
           sh 'mvn clean test -e'
-        //}
+        
       }
     }
     stage('jar') {
       steps {
-        //dir("/Users/rafael/cursos-dev/diplomado-devops/ci-cd/ejemplo-maven") {
           sh 'mvn clean package -e'
-        //}
       }
     }
     stage('SonarQube') {
@@ -31,18 +29,18 @@ pipeline {
     }
     stage('run') {
       steps {
-        //dir("/Users/rafael/cursos-dev/diplomado-devops/ci-cd/ejemplo-maven") {
+        
           withEnv(['JENKINS_NODE_COOKIE=dontkillme']) {
             sh """
  nohup java -jar build/DevOpsUsach2020-0.0.1.jar &
  """
           }
-        //}
+        
       }
     }
     stage('curl') {
       steps {
-        //dir("/Users/rafael/cursos-dev/diplomado-devops/ci-cd/ejemplo-maven") {
+        
           echo 'Esperando a que inicie el servidor'
           sleep(time: 10, unit: "SECONDS")
           script {
@@ -51,7 +49,7 @@ pipeline {
 
             echo response
           }
-        //}
+        
       }
     }
   }
